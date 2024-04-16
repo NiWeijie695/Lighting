@@ -1,0 +1,10 @@
+D:\C#\control_lighting\control_lighting\bin\Debug\control_lighting.exe.config
+D:\C#\control_lighting\control_lighting\bin\Debug\control_lighting.exe
+D:\C#\control_lighting\control_lighting\bin\Debug\control_lighting.pdb
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.csproj.AssemblyReference.cache
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.Properties.Resources.resources
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.csproj.GenerateResource.cache
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.csproj.CoreCompileInputs.cache
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.exe
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.pdb
+D:\C#\control_lighting\control_lighting\obj\Debug\control_lighting.Form1.resources
