@@ -26,16 +26,7 @@ namespace control_lighting
 
 
 
-            if (ComputerInfo.WinMajorVersion == 10 && ComputerInfo.WinMinorVersion == 0 && ComputerInfo.DisplayVersion == "23H2")
-            {
-                label2.Text = "可以使用动态光效";
-            }
-            else
-            {
-                label2.Text = "不可以使用动态光效";
-            }
-
-
+            //通过注册表读取此时动态光效状态
             const string keyPath = @"Software\Microsoft\Lighting";
             using (RegistryKey personalizeKey = Registry.CurrentUser.OpenSubKey(keyPath))
             {
@@ -54,6 +45,10 @@ namespace control_lighting
                     {
                         label1.Text = "选择颜色";
                     }
+                }
+                else
+                {
+                    label1.Text = "此设备暂不支持动态光效";
                 }
             }
 
@@ -82,32 +77,44 @@ namespace control_lighting
                 }
                 else
                 {
-                    label1.Text = "无法打开动态光效";
+                    label1.Text = "此设备暂不支持动态光效";
                 }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process.Start("ms-settings:personalization-lighting");
-
-            const string keyPath = @"Software\Microsoft\Lighting";
-            using (RegistryKey personalizeKey = Registry.CurrentUser.OpenSubKey(keyPath))
+            if (label1.Text == "此设备暂不支持动态光效")
             {
-                if (personalizeKey != null)
+                button1.Enabled = false;
+            }
+            else
+            { 
+                Process.Start("ms-settings:personalization-lighting");
+
+                const string keyPath = @"Software\Microsoft\Lighting";
+                using (RegistryKey personalizeKey = Registry.CurrentUser.OpenSubKey(keyPath))
                 {
-
-                    // 获取动态光效的设置值，通常为0（关闭）或1（开启）
-                    object dynamicLightingValue = personalizeKey.GetValue("AmbientLightingEnabled");
-
-                    // 根据键值输出状态
-                    if (dynamicLightingValue != null && (int)dynamicLightingValue == 1)
+                    if (personalizeKey != null)
                     {
-                        label1.Text = "请在Windows设置中禁用动态光效";
+
+                        // 获取动态光效的设置值，通常为0（关闭）或1（开启）
+                        object dynamicLightingValue = personalizeKey.GetValue("AmbientLightingEnabled");
+
+                        // 根据键值输出状态
+                        if (dynamicLightingValue != null && (int)dynamicLightingValue == 1)
+                        {
+                            label1.Text = "请在Windows设置中禁用动态光效";
+                        }
+                        else
+                        {
+                            label1.Text = "选择颜色";
+                        }
                     }
                     else
                     {
-                        label1.Text = "选择颜色";
+                        label1.Text = "此设备暂不支持动态光效";
+
                     }
                 }
             }
@@ -134,18 +141,10 @@ namespace control_lighting
                         label1.Text = "选择颜色";
                     }
                 }
-            }
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            if (ComputerInfo.WinMajorVersion == 10 && ComputerInfo.WinMinorVersion == 0 && ComputerInfo.DisplayVersion == "23H2")
-            {
-                label2.Text = "可以使用动态光效";
-            }
-            else
-            {
-                label2.Text = "不可以使用动态光效";
+                else
+                {
+                    label1.Text = "此设备暂不支持动态光效";
+                }
             }
         }
     }
